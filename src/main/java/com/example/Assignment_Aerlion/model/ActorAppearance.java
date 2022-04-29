@@ -1,13 +1,9 @@
 package com.example.Assignment_Aerlion.model;
 
-
-import org.hibernate.annotations.Type;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.List;
+
 
 @Entity
 @Table(name = "actor_appearances")

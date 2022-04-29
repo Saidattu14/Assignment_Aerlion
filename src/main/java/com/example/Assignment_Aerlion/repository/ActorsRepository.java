@@ -16,10 +16,5 @@ public interface ActorsRepository extends JpaRepository<Actors, Long> {
       @Query(value = "SELECT * From (SELECT * FROM actors ORDER BY primaryname ASC LIMIT :pagesize OFFSET :pageoffset) AS Temp WHERE Temp.primaryname =:name",nativeQuery = true)
       List<Actors> findActorInPage(@Param("pageoffset") int pageoffset,@Param("pagesize") int pagesize,@Param("name") String name);
 
-//      @Query(value = "SELECT * FROM actors ac ORDER BY primaryname ASC LIMIT :pagesize OFFSET :pageoffset)",nativeQuery = true)
-//      List<Actors> findActorInPage(@Param("pageoffset") int pageoffset,@Param("pagesize") int pagesize);
-
-
-
 }
 

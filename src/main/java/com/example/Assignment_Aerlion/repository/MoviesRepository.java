@@ -1,7 +1,6 @@
 package com.example.Assignment_Aerlion.repository;
 
 
-import com.example.Assignment_Aerlion.model.Actors;
 import com.example.Assignment_Aerlion.model.Movies;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
