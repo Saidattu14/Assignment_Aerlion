@@ -1,16 +1,11 @@
-package com.example.Assignment_Aerlion.model;
+package com.example.Assignment_Arelion.model;
 
 import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import org.hibernate.annotations.Type;
-
-
-import org.hibernate.annotations.*;
 
 
 @Entity

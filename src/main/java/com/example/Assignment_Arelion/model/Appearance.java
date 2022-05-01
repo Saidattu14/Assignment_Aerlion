@@ -1,4 +1,4 @@
-package com.example.Assignment_Aerlion.model;
+package com.example.Assignment_Arelion.model;
 
 public class Appearance<mv> {
 

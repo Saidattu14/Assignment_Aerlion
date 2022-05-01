@@ -1,18 +1,13 @@
-package com.example.Assignment_Aerlion.controller;
-import com.example.Assignment_Aerlion.Services.AuthService;
-import com.example.Assignment_Aerlion.Services.ActorsMoviesService;
-import com.example.Assignment_Aerlion.model.*;
-import com.example.Assignment_Aerlion.repository.ActorsAppearancesRepository;
-import com.example.Assignment_Aerlion.repository.ActorsRepository;
-import com.example.Assignment_Aerlion.repository.MoviesRepository;
+package com.example.Assignment_Arelion.controller;
+import com.example.Assignment_Arelion.Services.AuthService;
+import com.example.Assignment_Arelion.Services.ActorsMoviesService;
+import com.example.Assignment_Arelion.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController

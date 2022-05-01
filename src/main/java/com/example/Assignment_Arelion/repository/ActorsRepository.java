@@ -1,6 +1,7 @@
-package com.example.Assignment_Aerlion.repository;
-import com.example.Assignment_Aerlion.model.Actors;
+package com.example.Assignment_Arelion.repository;
+import com.example.Assignment_Arelion.model.Actors;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -31,6 +32,41 @@ public interface ActorsRepository extends JpaRepository<Actors, Long> {
        */
       @Query(value = "SELECT * From (SELECT * FROM actors ORDER BY primaryname ASC LIMIT :pagesize OFFSET :pageoffset) AS Temp WHERE Temp.primaryname =:name",nativeQuery = true)
       List<Actors> findActorInPage(@Param("pageoffset") int pageoffset,@Param("pagesize") int pagesize,@Param("name") String name);
+
+      /**
+       * This method is SQL Query Where it creates Actors Table.
+       */
+      @Modifying
+      @Query(value = "CREATE TABLE actors(\n" +
+              "    nconst varchar(255) NOT NULL PRIMARY KEY,\n" +
+              "    primaryName varchar(255),\n" +
+              "    birthYear int,\n" +
+              "    deathYear int,\n" +
+              "    primaryProfession text[],\n" +
+              "    knownForTitles text[]\n" +
+              ")",nativeQuery = true)
+      Actors CreateActorTable();
+
+      /**
+       * This method is SQL Query Where it Inserts Actor Data in Actors Table.
+       */
+      @Modifying
+      @Query(value = "INSERT INTO actors(" +
+              ":nconst," +
+              ":primaryName," +
+              ":birthYear," +
+              ":deathYear," +
+              ":primaryProfession," +
+              ":knownForTitles)",nativeQuery = true)
+      Actors InsertActorTable(@Param("nconst") String nconst,
+                              @Param("primaryName") String primaryName,
+                              @Param("birthYear") int birthYear,
+                              @Param("deathYear") int deathYear,
+                              @Param("primaryProfession") String [] primaryProfession,
+                              @Param("knownForTitles") String[] knownForTitles);
+
+
+
 
 }
 

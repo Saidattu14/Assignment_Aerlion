@@ -1,8 +1,8 @@
-package com.example.Assignment_Aerlion.model;
+package com.example.Assignment_Arelion.model;
 
 
 
-import com.example.Assignment_Aerlion.Enums.AccountStatusinfo;
+import com.example.Assignment_Arelion.Enums.AccountStatusinfo;
 
 import java.time.LocalTime;
 

@@ -1,4 +1,4 @@
-package com.example.Assignment_Aerlion.mapping;
+package com.example.Assignment_Arelion.mapping;
 
 import java.io.Serializable;
 import java.sql.Array;

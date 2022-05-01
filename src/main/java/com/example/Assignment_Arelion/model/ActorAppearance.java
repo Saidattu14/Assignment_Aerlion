@@ -1,4 +1,4 @@
-package com.example.Assignment_Aerlion.model;
+package com.example.Assignment_Arelion.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

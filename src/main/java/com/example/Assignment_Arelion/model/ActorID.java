@@ -1,9 +1,5 @@
-package com.example.Assignment_Aerlion.model;
+package com.example.Assignment_Arelion.model;
 
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 

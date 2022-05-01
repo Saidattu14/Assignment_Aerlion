@@ -1,5 +1,5 @@
-package com.example.Assignment_Aerlion.Config;
-import com.example.Assignment_Aerlion.Security.CustomAuthenticationProvider;
+package com.example.Assignment_Arelion.Config;
+import com.example.Assignment_Arelion.Security.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

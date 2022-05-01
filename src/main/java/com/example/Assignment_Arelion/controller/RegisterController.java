@@ -1,8 +1,7 @@
-package com.example.Assignment_Aerlion.controller;
+package com.example.Assignment_Arelion.controller;
 
 
-import com.example.Assignment_Aerlion.Security.CustomAuthenticationProvider;
-import com.example.Assignment_Aerlion.Services.AuthService;
+import com.example.Assignment_Arelion.Services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

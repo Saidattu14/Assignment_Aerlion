@@ -1,4 +1,4 @@
-package com.example.Assignment_Aerlion.Enums;
+package com.example.Assignment_Arelion.Enums;
 
 /**
  * This a enum class where it represents Account Status Info.

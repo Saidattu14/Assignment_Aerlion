@@ -1,9 +1,9 @@
-package com.example.Assignment_Aerlion.Services;
+package com.example.Assignment_Arelion.Services;
 
-import com.example.Assignment_Aerlion.model.*;
-import com.example.Assignment_Aerlion.repository.ActorsAppearancesRepository;
-import com.example.Assignment_Aerlion.repository.ActorsRepository;
-import com.example.Assignment_Aerlion.repository.MoviesRepository;
+import com.example.Assignment_Arelion.model.*;
+import com.example.Assignment_Arelion.repository.ActorsAppearancesRepository;
+import com.example.Assignment_Arelion.repository.ActorsRepository;
+import com.example.Assignment_Arelion.repository.MoviesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
