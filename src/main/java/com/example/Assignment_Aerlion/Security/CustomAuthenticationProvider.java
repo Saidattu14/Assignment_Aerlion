@@ -27,6 +27,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     AuthService authService;
 
 
+    /**
+     * This method verifies the userdata and grant access the API.
+     */
     public Authentication getAuth(final Authentication authentication)
     {
         final String name = authentication.getName();
@@ -38,7 +41,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         return auth;
 
     }
-
+    /**
+     * This method authenticate the user Sign In to access the API.
+     */
     @Override
     public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
         boolean result = authService.UserDataAuthentication(authentication);

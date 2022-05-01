@@ -12,7 +12,12 @@ public class AuthService {
 
     public HashMap<String, UserData> usersMap = new HashMap<>();
 
-
+    /**
+     * This method returns boolean value.
+     * This Method validate Sign In details for the UserAccount When the user tries to regester the data.
+     * @param @authentication
+     * @return true if no such useraccount details found else false for similar data.
+     */
     public boolean RegisterAuthentication(final Authentication authentication)
     {
         final String name = authentication.getName();
@@ -28,6 +33,11 @@ public class AuthService {
         }
         return false;
     }
+    /**
+     * This method returns true if the user exceeds the maximum request per minute.
+     * @param @authentication
+     * @return true if exceeds else false
+     */
 
     public boolean RateLimitingRequests(final Authentication authentication)
     {
@@ -93,7 +103,12 @@ public class AuthService {
         }
         return true;
     }
-
+    /**
+     * This method validates the User Account data when user tries to access the API data.
+     * Main Purpose is to activate the UserData when the user SignIn
+     * @param authentication
+     * @return true if the user has a registed Account Else it returns false.
+     */
     public boolean LoginAuthentication(final Authentication authentication)
     {
         final String name = authentication.getName();
@@ -109,6 +124,11 @@ public class AuthService {
         return false;
     }
 
+    /**
+     * This method validates the data at the Initial Authentiction Level.
+     * @param @authentication
+     * @return true if user is authorised else false
+     */
     public boolean UserDataAuthentication(final Authentication authentication)
     {
         final String name = authentication.getName();
@@ -116,14 +136,7 @@ public class AuthService {
         if(usersMap.get(name) != null && name.length() != 0 && password.length() !=0)
         {
             UserData u = usersMap.get(name);
-            if(u.getPassword().equals(password) == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return u.getPassword().equals(password);
         }
         else if(usersMap.get(name) == null && name.length() != 0 && password.length() !=0)
         {

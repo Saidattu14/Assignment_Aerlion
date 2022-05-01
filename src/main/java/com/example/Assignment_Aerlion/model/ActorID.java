@@ -15,7 +15,9 @@ public class ActorID {
       private long birthyear;
       private long deathyear;
       private String[] primaryprofession;
-
+    /**
+     * This is a class constructor where is assign data for the data in the class variables.
+     */
     public ActorID(Actors m1, List<Movies> list) {
         this.nconst = m1.getNconst();
         this.primaryname = m1.getPrimaryname();

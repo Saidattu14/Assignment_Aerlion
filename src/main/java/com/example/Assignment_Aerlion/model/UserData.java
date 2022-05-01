@@ -16,7 +16,6 @@ public class UserData {
     private AccountStatusinfo accountStatusinfo;
 
 
-
     public String getPassword() {
         return password;
     }
@@ -57,7 +56,9 @@ public class UserData {
         this.lastrequesttime = lastrequesttime;
     }
 
-
+    /**
+     * This is a class constructor where is assign userdata for the class variables.
+     */
     public UserData(String username, String password, int noofrequestsperminute, LocalTime lastrequesttime, AccountStatusinfo accountStatusinfo)
     {
         this.username = username;

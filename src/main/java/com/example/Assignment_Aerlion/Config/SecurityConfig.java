@@ -21,12 +21,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         super();
     }
 
+    /**
+     * This is method override the configure function and verifies the auth Sign In details.
+     */
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
 
         auth.authenticationProvider(authProvider);
     }
-
+    /**
+     * This is method override the configure function and authorize and authenticate every request.
+     */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 //             http

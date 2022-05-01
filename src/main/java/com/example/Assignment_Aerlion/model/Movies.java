@@ -74,7 +74,9 @@ public class Movies {
 	}
 
 
-
+	/**
+	 * This is a class constructor where is assign movies data the class variables.
+	 */
 	public Movies(String tconst, String titleType, String primaryTitle, String originalTitle, boolean isAdult, long startYear,long endYear, long runtimeMinutes, String genres) {
 		this.tconst = tconst;
 		this.titletype = titleType;

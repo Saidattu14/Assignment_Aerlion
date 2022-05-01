@@ -1,5 +1,6 @@
 package com.example.Assignment_Aerlion.controller;
 import com.example.Assignment_Aerlion.Services.AuthService;
+import com.example.Assignment_Aerlion.Services.ActorsMoviesService;
 import com.example.Assignment_Aerlion.model.*;
 import com.example.Assignment_Aerlion.repository.ActorsAppearancesRepository;
 import com.example.Assignment_Aerlion.repository.ActorsRepository;
@@ -17,32 +18,25 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class MoviesActorsController {
-	@Autowired
-	private MoviesRepository moviesRepository;
-
-	@Autowired
-	private ActorsRepository actorsRepository;
-
-	@Autowired
-	private ActorsAppearancesRepository actorsAppearancesRepository;
 
 	@Autowired
 	AuthService authService;
+	@Autowired
+	ActorsMoviesService actorsMoviesService;
 
 
-	private Actors actors;
+
+	private ActorID actorID;
 	private Movies movie;
+	private List<Movies> ListMovies;
+	private List<Appearance> ListActorAppearances;
+	private List<Actors> ListActors;
 
-
-	public MoviesActorsController(MoviesRepository mr,ActorsRepository ar, ActorsAppearancesRepository aar)
-	{
-
-		this.moviesRepository = mr;
-		this.actorsRepository = ar;
-		this.actorsAppearancesRepository = aar;
-
-	}
-
+	/**
+	 * This is a get request end point /actors/{id}.
+	 * It fetches the actor data for specific id.
+	 * @return the ActorID object in Json Form
+	 */
 	@GetMapping("/actors/{id}")
 	public ResponseEntity<ActorID> getActorWithId(@PathVariable String id, final Authentication authentication) {
 		try {
@@ -54,19 +48,22 @@ public class MoviesActorsController {
 			{
 				return new ResponseEntity<>(null,HttpStatus.TOO_MANY_REQUESTS);
 			}
-			Actors actors = actorsRepository.findBynconst(id);
-			if(actors == null)
+			actorID = actorsMoviesService.ActorDataWithId(id);
+			if(actorID == null)
 			{
 				return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
 			}
-			List<Movies> list = new ArrayList<Movies>();
-			Arrays.stream(actors.getKnownfortitles())
-					.forEach(x-> list.add(moviesRepository.findBytconst(x)));
-			return new ResponseEntity<>(new ActorID(actors, (List<Movies>) list), HttpStatus.OK);
+			return new ResponseEntity<>(actorID, HttpStatus.OK);
 		} catch (Exception e) {
+			System.out.println(e);
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	/**
+	 * This is a get request end point /actors.
+	 * It fetches the all actor data.
+	 * @return the List of Actors object in Json Form
+	 */
 	@GetMapping("/actors")
 	public ResponseEntity <List<Actors>> getAllActors(
 			final Authentication authentication,
@@ -82,32 +79,27 @@ public class MoviesActorsController {
 			{
 				return new ResponseEntity<>(null,HttpStatus.TOO_MANY_REQUESTS);
 			}
-			int pageoffset = 0;
-			for(int i = 0; i<page;i++)
+			ListActors = actorsMoviesService.AllActors(page,page_size,name);
+			if(ListActors == null)
 			{
-				pageoffset = page * i+1 * 1000;
+				return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
 			}
-			List<Actors> m1 = new ArrayList<Actors>();
-			if(name.length() == 0)
-			{
-				actorsRepository.findAllActors(pageoffset,page_size).forEach(m1::add);
-			}
-			else
-			{
-				actorsRepository.findActorInPage(pageoffset,page_size,name).forEach(m1::add);
-			}
-			return new ResponseEntity<>(m1,HttpStatus.OK);
+			return new ResponseEntity<>(ListActors,HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e);
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	/**
+	 * This is a get request end point /actors/{id}/appearances.
+	 * It fetches the actor data for specific id along with appearances details.
+	 * @return the List of Appearance objects in Json Form
+	 */
 	@GetMapping("/actors/{id}/appearances")
 	public ResponseEntity<List<Appearance>> getActorAppearances
 			(@PathVariable String id,final Authentication authentication,
 			 @RequestParam(required = false,defaultValue = "0") int page,
-	@RequestParam(required = false,defaultValue = "10") long page_size) {
+	@RequestParam(required = false,defaultValue = "10") int page_size) {
 		try {
 			if(authService.LoginAuthentication(authentication) == false)
 			{
@@ -117,24 +109,21 @@ public class MoviesActorsController {
 			{
 				return new ResponseEntity<>(null,HttpStatus.TOO_MANY_REQUESTS);
 			}
-			actors = actorsRepository.findBynconst(id);
-			List<ActorAppearance> list1 = new ArrayList<ActorAppearance>();
-			List<Appearance> list2 = new ArrayList<>();
-			Arrays.stream(actors.getKnownfortitles())
-					.forEach(x-> list1.add(actorsAppearancesRepository
-							.findactorappearnces(actors
-									.getNconst(),x)));
-			list1.forEach(x -> list2
-					.add(new Appearance (x,moviesRepository
-							.findBytconst(x
-									.getTconst()))));
-
-			return new ResponseEntity<>(list2, HttpStatus.OK);
+			ListActorAppearances = actorsMoviesService.ActorAppearances(id,page,page_size);
+			if(ListActorAppearances == null)
+			{
+				return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(ListActorAppearances, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	/**
+	 * This is a get request end point /movies.
+	 * It fetches the all movies data.
+	 * @return the List of Movies object in Json Form
+	 */
 	@GetMapping("/movies")
 	public ResponseEntity<List<Movies>> getMovies(
 			String id,final Authentication authentication,
@@ -150,27 +139,22 @@ public class MoviesActorsController {
 			{
 				return new ResponseEntity<>(null,HttpStatus.TOO_MANY_REQUESTS);
 			}
-			List<Movies> m1 = new ArrayList<Movies>();
-			int pageoffset = 0;
-			for(int i = 0; i<page;i++)
+			ListMovies = actorsMoviesService.AllMovies(page,page_size,name);
+			if(ListMovies == null)
 			{
-				pageoffset = page * i+1 * 1000;
+				return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
 			}
-			if(name.length() == 0)
-			{
-				moviesRepository.findallmovies(pageoffset,page_size).forEach(m1::add);
-			}
-			else
-			{
-				moviesRepository.findMovieInPage(pageoffset,page_size,name).forEach(m1::add);
-			}
-			return new ResponseEntity<>(m1,HttpStatus.OK);
+			return new ResponseEntity<>(ListMovies,HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e);
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	/**
+	 * This is a get request end point /movie/{id}.
+	 * It fetches the movie data for specific id.
+	 * @return the Movie object in Json Form
+	 */
 	@GetMapping("/movies/{id}")
 	public ResponseEntity<Movies> getMovieWithId(
 			@PathVariable String id,final Authentication authentication) {
@@ -183,10 +167,10 @@ public class MoviesActorsController {
 			{
 				return new ResponseEntity<>(null,HttpStatus.TOO_MANY_REQUESTS);
 			}
-			movie = moviesRepository.findBytconst(id);
+			movie = actorsMoviesService.MovieWithId(id);
 			if(movie == null)
 			{
-				return  new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<>(movie,HttpStatus.OK);
 		} catch (Exception e) {

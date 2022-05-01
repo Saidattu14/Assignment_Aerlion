@@ -78,6 +78,9 @@ public class ActorAppearance {
         this.category = category;
     }
 
+    /**
+     * This is a class Constructor of the ActorAppearance.
+     */
     public ActorAppearance(String tconst, String nconst, String category, String job, String characters, int ordering) {
         this.tconst = tconst;
         this.nconst = nconst;

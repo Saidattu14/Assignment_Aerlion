@@ -20,7 +20,9 @@ public class Appearance<mv> {
     public void setMovie(Movies movie) {
         this.movie = movie;
     }
-
+    /**
+     * This is a class constructor where is assign appearances data for the class variables.
+     */
     public Appearance(ActorAppearance list,Movies movie) {
         this.appearances = list;
         this.movie = movie;

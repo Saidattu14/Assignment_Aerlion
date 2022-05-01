@@ -16,13 +16,15 @@ public class RegisterController  {
     @Autowired
     AuthService authService;
 
-    @Autowired
-    private CustomAuthenticationProvider authProvider;
-
     public RegisterController()
     {
 
     }
+    /**
+     * This is a get request end point /register/user.
+     * It makes user to get input their Sign In details.
+     * @return the String in Json Form
+     */
     @GetMapping("/user")
     public ResponseEntity<String> registerUser(Authentication authentication) {
 

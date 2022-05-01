@@ -78,6 +78,10 @@ public class Actors {
     public void setBirthyear(long birthyear) {
         this.birthyear = birthyear;
     }
+
+    /**
+     * This is a class constructor where is assign actors data the class variables.
+     */
     public Actors(String nconst,String primaryname,long birthyear,long deathyear,String[] primaryprofession,String[] knownfortitles) {
         this.nconst = nconst;
         this.primaryname = primaryname;
