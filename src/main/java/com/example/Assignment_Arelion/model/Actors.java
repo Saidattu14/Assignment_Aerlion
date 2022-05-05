@@ -17,10 +17,10 @@ public class Actors {
     private long birthyear;
     private long deathyear;
     @Column(columnDefinition = "text[]")
-    @Type(type = "com.example.Assignment_Aerlion.mapping.CustomStringArrayType")
+    @Type(type = "com.example.Assignment_Arelion.mapping.CustomStringArrayType")
     private String[] primaryprofession;
     @Column(columnDefinition = "text[]")
-    @Type(type = "com.example.Assignment_Aerlion.mapping.CustomStringArrayType")
+    @Type(type = "com.example.Assignment_Arelion.mapping.CustomStringArrayType")
     private String[] knownfortitles;
 
     public Actors() {
