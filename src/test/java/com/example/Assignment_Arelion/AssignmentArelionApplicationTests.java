@@ -2,10 +2,14 @@ package com.example.Assignment_Arelion;
 
 import com.example.Assignment_Arelion.Enums.AccountStatusinfo;
 import com.example.Assignment_Arelion.Services.AuthService;
+import com.example.Assignment_Arelion.model.Actors;
 import com.example.Assignment_Arelion.model.UserData;
 import com.example.Assignment_Arelion.repository.ActorsAppearancesRepository;
 import com.example.Assignment_Arelion.repository.ActorsRepository;
 import com.example.Assignment_Arelion.repository.MoviesRepository;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,32 +18,72 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.persistence.EntityManagerFactory;
+import java.sql.Array;
 import java.time.LocalTime;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AssignmentArelionApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class AssignmentArelionApplicationTests {
+class AssignmentArelionApplicationTests{
+
+
+	@Autowired
+	TestRestTemplate template;
+
+	@Autowired
+	AuthService authService;
+
+    @Autowired
+	ActorsRepository actorsRepository;
+
+	@Autowired
+	MoviesRepository moviesRepository;
+
+	@Autowired
+	ActorsAppearancesRepository actorsAppearancesRepository;
+
+	@Autowired
+	private EntityManagerFactory entityManagerFactory;
+
+
+
+	AssignmentArelionApplicationTests() {
+		try {
+			moviesRepository.CreateMovieTable();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		try {
+			actorsAppearancesRepository.CreateAppearanceTable();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		try {
+			actorsRepository.CreateActorTable();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
+	}
 
 	@Test
 	void contextLoads() {
+		assertNotNull(authService);
+		assertNotNull(actorsRepository);
+		assertNotNull(moviesRepository);
+		assertNotNull(actorsAppearancesRepository);
 	}
-	@Autowired
-	private TestRestTemplate template;
 
-	@Autowired
-	private AuthService authService;
-
-    @Autowired
-	private ActorsRepository actorsRepository;
-
-	@Autowired
-	private MoviesRepository moviesRepository;
-
-	@Autowired
-	private ActorsAppearancesRepository actorsAppearancesRepository;
 	@Test
 	public void TestingAuthRequestOnApiServiceForUnauthorizedUser_shouldSucceedWith401() throws Exception {
 		ResponseEntity<Object> result = template.withBasicAuth("spring", "secret")
@@ -49,6 +93,15 @@ class AssignmentArelionApplicationTests {
 
 	@Test
 	public void TestingAuthRequestOnApiServiceForAuthorizedUser_shouldSucceedWith200() throws Exception {
+
+		String [] knownForTitles = new String[] {"tt03","tt01", "tt02", "tt07"};
+		String [] primaryProfession = new String[] {"actress","soundtrack", "music_department"};
+		actorsRepository.save( new Actors("nm04",
+				"Brigitte",
+				1943,
+				0,
+				primaryProfession,
+				knownForTitles));
 		authService.usersMap.put("sai",new UserData("sai","dattu",1,LocalTime.now(),AccountStatusinfo.Actived));
 		ResponseEntity<Object> result = template.withBasicAuth("sai", "dattu")
 				.getForEntity("/api/v1/actors", Object.class);
@@ -83,25 +136,19 @@ class AssignmentArelionApplicationTests {
 	}
 	@Test
 	public void TestingAPIServiceWithFetchingActorWithValidID() throws Exception {
-		try {
 
-			actorsRepository.CreateActorTable();
 			String [] knownForTitles = new String[] {"tt03","tt01", "tt02", "tt07"};
 			String [] primaryProfession = new String[] {"actress","soundtrack", "music_department"};
-			actorsRepository.InsertActorTable("nm04",
+            actorsRepository.save(new Actors("nm04",
 					"Brigitte",
 					1943,
 					0,
 					primaryProfession
-					,knownForTitles);
+					,knownForTitles));
 			ResponseEntity<String> result = template.withBasicAuth("sajssji", "dattssju")
 					.getForEntity("/api/v1/actors/nm04", String.class);
 			assertEquals(HttpStatus.OK, result.getStatusCode());
-		}
-		catch (Exception e)
-		{
-         System.out.println(e);
-		}
+
 	}
 	@Test
 	public void TestingAPIServiceWithFetchingActorWithInValidID() throws Exception {
@@ -118,7 +165,7 @@ class AssignmentArelionApplicationTests {
 	@Test
 	public void TestingAPIServiceWithFetchingMovieWithValidID() throws Exception {
 		try {
-			moviesRepository.CreateMovieTable();
+
 			moviesRepository.InsertMovieTable("tt11",
 					"movie",
 					2012,
@@ -136,7 +183,9 @@ class AssignmentArelionApplicationTests {
 		catch (Exception e)
 		{
 			System.out.println(e);
+			System.out.println("sjsjsjsjsjs");
 		}
+
 	}
 	@Test
 	public void TestingAPIServiceWithFetchingMovieWithInValidID() throws Exception {
@@ -154,9 +203,6 @@ class AssignmentArelionApplicationTests {
 	@Test
 	public void TestingAPIServiceWithFetchingActorWithValidIDAndAppearances() throws Exception {
 		try {
-			moviesRepository.CreateMovieTable();
-			actorsRepository.CreateActorTable();
-			actorsAppearancesRepository.CreateAppearanceTable();
 			moviesRepository.InsertMovieTable("tt12",
 					"movie",
 					2012,
@@ -167,17 +213,23 @@ class AssignmentArelionApplicationTests {
 					2010,
 					true
 			);
-			String [] knownForTitles = new String[] {"tt12"};
-			String [] primaryProfession = new String[] {"actress","soundtrack", "music_department"};
-			actorsRepository.InsertActorTable("nm06","Brigitte",1943,0,primaryProfession,knownForTitles);
-
-			ResponseEntity<String> result = template.withBasicAuth("sajssji", "dattssju")
-					.getForEntity("/api/v1/actors/nm06/appearances", String.class);
-			assertEquals(HttpStatus.OK, result.getStatusCode());
 		}
 		catch (Exception e)
 		{
 			System.out.println(e);
 		}
+		try {
+			String[] knownForTitles = new String[]{"tt12"};
+			String[] primaryProfession = new String[]{"actress", "soundtrack", "music_department"};
+			actorsRepository.save(new Actors("nm06", "Brigitte", 1943, 0, primaryProfession, knownForTitles));
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		ResponseEntity<String> result = template.withBasicAuth("sajssji", "dattssju")
+				.getForEntity("/api/v1/actors/nm06/appearances", String.class);
+		assertEquals(HttpStatus.OK, result.getStatusCode());
+
 	}
 }

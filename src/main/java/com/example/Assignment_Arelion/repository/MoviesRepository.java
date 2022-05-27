@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -37,6 +37,7 @@ public interface MoviesRepository extends JpaRepository<Movies, Long>{
      * This method is SQL Query Where it creates Movies Table.
      */
     @Modifying
+    @Transactional
     @Query(value = "CREATE TABLE movies(\n" +
             "    tconst varchar(255) NOT NULL PRIMARY KEY,\n" +
             "    titleType varchar(255),\n" +
@@ -48,12 +49,13 @@ public interface MoviesRepository extends JpaRepository<Movies, Long>{
             "\t  startYear int,\n" +
             "\t  isAdult boolean\n" +
             ")",nativeQuery = true)
-    Movies CreateMovieTable();
+    void CreateMovieTable();
 
     /**
      * This method is SQL Query Where it Inserts Actor Data in Actors Table.
      */
     @Modifying
+    @Transactional
     @Query(value = "INSERT INTO movies" +
             "(tconst," +
             "titleType," +
@@ -63,8 +65,18 @@ public interface MoviesRepository extends JpaRepository<Movies, Long>{
             "genres," +
             "runtimeMinutes," +
             "startYear," +
-            "isAdult)",nativeQuery = true)
-    Movies InsertMovieTable(@Param("tconst") String tconst,
+            "isAdult)" + " "+
+            "VALUES(" +
+            ":tconst," +
+            ":titleType," +
+            ":endYear," +
+            ":primaryTitle," +
+            ":originalTitle," +
+            ":genres," +
+            ":runtimeMinutes," +
+            ":startYear," +
+            ":isAdult)",nativeQuery = true)
+    void InsertMovieTable(@Param("tconst") String tconst,
                             @Param("titleType") String titleType,
                             @Param("endYear") int endYear,
                             @Param("primaryTitle") String primaryTitle,

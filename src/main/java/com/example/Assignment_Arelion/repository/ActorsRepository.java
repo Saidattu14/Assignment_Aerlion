@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import javax.transaction.Transactional;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public interface ActorsRepository extends JpaRepository<Actors, Long> {
        * This method is SQL Query Where it creates Actors Table.
        */
       @Modifying
+      @Transactional
       @Query(value = "CREATE TABLE actors(\n" +
               "    nconst varchar(255) NOT NULL PRIMARY KEY,\n" +
               "    primaryName varchar(255),\n" +
@@ -45,25 +47,38 @@ public interface ActorsRepository extends JpaRepository<Actors, Long> {
               "    primaryProfession text[],\n" +
               "    knownForTitles text[]\n" +
               ")",nativeQuery = true)
-      Actors CreateActorTable();
+      void CreateActorTable();
+
 
       /**
        * This method is SQL Query Where it Inserts Actor Data in Actors Table.
        */
       @Modifying
+      @Transactional
       @Query(value = "INSERT INTO actors(" +
+              "nconst," +
+              "primaryName," +
+              "birthYear," +
+              "deathYear," +
+              "primaryProfession," +
+              "knownForTitles)" + " " +
+              "VALUES (" +
               ":nconst," +
               ":primaryName," +
               ":birthYear," +
               ":deathYear," +
               ":primaryProfession," +
-              ":knownForTitles)",nativeQuery = true)
-      Actors InsertActorTable(@Param("nconst") String nconst,
+              ":knownForTitles)"
+              ,nativeQuery = true)
+      void InsertActorTable(
+                              @Param("nconst") String nconst,
                               @Param("primaryName") String primaryName,
                               @Param("birthYear") int birthYear,
                               @Param("deathYear") int deathYear,
                               @Param("primaryProfession") String [] primaryProfession,
                               @Param("knownForTitles") String[] knownForTitles);
+
+
 
 
 

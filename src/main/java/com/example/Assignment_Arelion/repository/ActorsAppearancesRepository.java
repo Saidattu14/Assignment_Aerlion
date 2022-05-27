@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import javax.transaction.Transactional;
 
 @Repository
 
@@ -21,6 +22,7 @@ public interface ActorsAppearancesRepository extends JpaRepository<ActorAppearan
      * This method is SQL Query Where it creates ActorsAppearances Table.
      */
     @Modifying
+    @Transactional
     @Query(value = "CREATE TABLE actor_appearances(\n" +
             "  id SERIAL NOT NULL PRIMARY KEY,\n" +
             "  nconst varchar(255),\n" +
@@ -30,21 +32,30 @@ public interface ActorsAppearancesRepository extends JpaRepository<ActorAppearan
             "  job varchar(255),\n" +
             "  characters varchar(255)\n" +
             ")",nativeQuery = true)
-    ActorAppearance CreateAppearanceTable();
+    void CreateAppearanceTable();
 
     /**
      * This method is SQL Query Where it Inserts ActorAppearances Data in ActorsAppearances Table.
      */
     @Modifying
+    @Transactional
     @Query(value = "INSERT INTO actor_appearances" +
             "(nconst," +
             "tconst," +
             "ordering," +
             "category," +
             "job," +
-            "characters," +
+            "characters" +
+            ")"+" " +
+            "VALUES"+
+            "(:nconst," +
+            ":tconst," +
+            ":ordering," +
+            ":category," +
+            ":job," +
+            ":characters" +
             ")",nativeQuery = true)
-    ActorAppearance InsertActorsAppearancesTable(@Param("nconst") String nconst,
+    void InsertActorsAppearancesTable(@Param("nconst") String nconst,
                             @Param("tconst") String tconst,
                             @Param("ordering") int ordering,
                             @Param("category") String category,
