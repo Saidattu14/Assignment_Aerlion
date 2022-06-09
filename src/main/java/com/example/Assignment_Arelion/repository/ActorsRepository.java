@@ -10,13 +10,15 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public interface ActorsRepository extends JpaRepository<Actors, Long> {
+public interface ActorsRepository extends JpaRepository<Actors,Long> {
       /**
        * This method is SQL Query Where it finds the actor data.
        * The Condition here is it finds actor id fetch that row.
        * @return the row
        */
-      Actors findBynconst(String nconst);
+       Actors findBynconst(String nconst);
+
+
 
       /**
        * This method is SQL Query Where it finds the all actors data.
@@ -26,6 +28,8 @@ public interface ActorsRepository extends JpaRepository<Actors, Long> {
       @Query(value = "SELECT * FROM actors ac ORDER BY primaryname ASC LIMIT :pagesize OFFSET :pageoffset",nativeQuery = true)
       List<Actors> findAllActors(@Param("pageoffset") int pageoffset, @Param("pagesize") int pagesize);
 
+
+
       /**
        * This method is SQL Query Where it finds the actor in particular page.
        * The Condition here is it finds particular row and search the data with selected username.
@@ -33,6 +37,8 @@ public interface ActorsRepository extends JpaRepository<Actors, Long> {
        */
       @Query(value = "SELECT * From (SELECT * FROM actors ORDER BY primaryname ASC LIMIT :pagesize OFFSET :pageoffset) AS Temp WHERE Temp.primaryname =:name",nativeQuery = true)
       List<Actors> findActorInPage(@Param("pageoffset") int pageoffset,@Param("pagesize") int pagesize,@Param("name") String name);
+
+
 
       /**
        * This method is SQL Query Where it creates Actors Table.
@@ -71,17 +77,12 @@ public interface ActorsRepository extends JpaRepository<Actors, Long> {
               ":knownForTitles)"
               ,nativeQuery = true)
       void InsertActorTable(
-                              @Param("nconst") String nconst,
-                              @Param("primaryName") String primaryName,
-                              @Param("birthYear") int birthYear,
-                              @Param("deathYear") int deathYear,
-                              @Param("primaryProfession") String [] primaryProfession,
-                              @Param("knownForTitles") String[] knownForTitles);
-
-
-
-
-
+              @Param("nconst") String nconst,
+              @Param("primaryName") String primaryName,
+              @Param("birthYear") int birthYear,
+              @Param("deathYear") int deathYear,
+              @Param("primaryProfession") String [] primaryProfession,
+              @Param("knownForTitles") String[] knownForTitles);
 
 }
 

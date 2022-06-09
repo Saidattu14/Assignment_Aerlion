@@ -18,7 +18,7 @@ public class AuthService {
      * @param @authentication
      * @return true if no such useraccount details found else false for similar data.
      */
-    public boolean RegisterAuthentication(final Authentication authentication)
+    public boolean registerAuthentication(final Authentication authentication)
     {
         final String name = authentication.getName();
         if(usersMap.get(name) != null)
@@ -33,83 +33,100 @@ public class AuthService {
         }
         return false;
     }
+
+
     /**
      * This method returns true if the user exceeds the maximum request per minute.
      * @param @authentication
      * @return true if exceeds else false
      */
-
-    public boolean RateLimitingRequests(final Authentication authentication)
+    public boolean rateLimitingRequests(final Authentication authentication)
     {
         final String name = authentication.getName();
         if(usersMap.get(name) != null)
         {
             UserData u = usersMap.get(name);
-            String lastrequesttimeStrArr [] = u.getLastrequesttime().toString().split(":");
-            String currentrequesttimeStr[] = LocalTime.now().toString().split(":");
-            String lastrequesttime = "";
-            String currentrequesttime = "";
-            for(int i = 0; i<currentrequesttimeStr.length;i++)
+            int lastRequestTimeData = Integer.parseInt(getLastRequestTime(u));
+            int currentRequestTimeData = Integer.parseInt(getCurrentRequestTime(u));
+            if(lastRequestTimeData > currentRequestTimeData)
             {
-                if(i != 2) {
-                    currentrequesttime = currentrequesttime + currentrequesttimeStr[i];
-                }
-                else
+                currentRequestTimeData = lastRequestTimeData + currentRequestTimeData;
+            }
+            if(currentRequestTimeData - lastRequestTimeData >= 60)
+            {
+                u.setLastRequestTime(LocalTime.now());
+                u.setNoOfRequestsPerMinute(1);
+            }
+            else if(currentRequestTimeData - lastRequestTimeData < 60)
+            {
+                if(u.getNoOfRequestsPerMinute() <=5)
                 {
-                    String seconds[] = currentrequesttimeStr[i].split("[.]");
-                    currentrequesttime = currentrequesttime + seconds[0];
-
-                }
-            }
-            for(int i = 0; i<lastrequesttimeStrArr.length;i++)
-            {
-                if(i != 2) {
-                    lastrequesttime = lastrequesttime +lastrequesttimeStrArr[i];
-                }
-                else
-                {
-                    String seconds[] = lastrequesttimeStrArr[i].split("[.]");
-                    lastrequesttime = lastrequesttime + seconds[0];
-                }
-            }
-            int lastrequesttimedata = Integer.parseInt(lastrequesttime);
-            int currentrequesttimedata = Integer.parseInt(currentrequesttime);
-//            System.out.println(currentrequesttimedata);
-//            System.out.println(lastrequesttimedata);
-            if(lastrequesttimedata > currentrequesttimedata)
-            {
-                currentrequesttimedata = lastrequesttimedata + currentrequesttimedata;
-            }
-            if(currentrequesttimedata - lastrequesttimedata >= 60)
-            {
-                u.setLastrequesttime(LocalTime.now());
-                u.setNoofrequestsperminute(1);
-            }
-            else if(currentrequesttimedata - lastrequesttimedata < 60)
-            {
-                if(u.getNoofrequestsperminute() <=5)
-                {
-                    u.setNoofrequestsperminute(u.getNoofrequestsperminute()+1);
+                    u.setNoOfRequestsPerMinute(u.getNoOfRequestsPerMinute()+1);
                 }
                 else {
                     return false;
                 }
             }
-
-//            Arrays.stream(lastrequesttimeStrArr).forEach(x->lastrequesttime.concat(x));
-//            Arrays.stream(currentrequesttimeStr).forEach(x->currentrequesttime.concat(x));
-//            System.out.println(lastrequesttime);
-//            System.out.println(currentrequesttime);
         }
         return true;
     }
+
+
+    /**
+     * This method get the currentRequestTime API call time of the user data.
+     * @param @UserData
+     * @return time value in String.
+     */
+    private String getCurrentRequestTime(UserData u)
+    {
+        String currentRequestTimeStr[] = LocalTime.now().toString().split(":");
+        String currentRequestTime = "";
+        for(int i = 0; i<currentRequestTimeStr.length;i++)
+        {
+            if(i != 2) {
+                currentRequestTime = currentRequestTime + currentRequestTimeStr[i];
+            }
+            else
+            {
+                String seconds[] = currentRequestTimeStr[i].split("[.]");
+                currentRequestTime = currentRequestTime + seconds[0];
+
+            }
+        }
+        return currentRequestTime;
+    }
+
+    /**
+     * This method get the lastRequestTime API call time of the user data.
+     * @param @UserData
+     * @return time value in String.
+     */
+    private String getLastRequestTime(UserData u)
+    {
+        String lastRequestRimeStrArr [] = u.getLastRequestTime().toString().split(":");
+        String lastRequestTime = "";
+        for(int i = 0; i<lastRequestRimeStrArr.length;i++)
+        {
+            if(i != 2) {
+                lastRequestTime = lastRequestTime +lastRequestRimeStrArr[i];
+            }
+            else
+            {
+                String seconds[] = lastRequestRimeStrArr[i].split("[.]");
+                lastRequestTime = lastRequestTime + seconds[0];
+            }
+        }
+        return lastRequestTime;
+    }
+
+
     /**
      * This method validates the User Account data when user tries to access the API data.
      * Main Purpose is to activate the UserData when the user SignIn
      * @param authentication
      * @return true if the user has a registed Account Else it returns false.
      */
-    public boolean LoginAuthentication(final Authentication authentication)
+    public boolean loginAuthentication(final Authentication authentication)
     {
         final String name = authentication.getName();
         if(usersMap.get(name) != null)
@@ -129,7 +146,7 @@ public class AuthService {
      * @param @authentication
      * @return true if user is authorised else false
      */
-    public boolean UserDataAuthentication(final Authentication authentication)
+    public boolean userDataAuthentication(final Authentication authentication)
     {
         final String name = authentication.getName();
         final String password = authentication.getCredentials().toString();

@@ -1,0 +1,13 @@
+tconst,ordering,nconst,category,job,characters
+tt01,1,nm01,self,\N,"[""Self,hero""]"
+tt02,2,nm01,director,\N,\N
+tt03,3,nm01,cinematographer,director of photography,\N
+tt04,1,nm01,director,\N,\N
+tt05,2,nm02,composer,\N,\N
+tt07,1,nm02,director,\N,\N
+tt08,2,nm02,composer,\N,\N
+tt01,1,nm02,actor,\N,"[""Blacksmith""]"
+tt02,2,nm03,actor,\N,"[""Assistant""]"
+tt06,3,nm03,director,\N,\N
+tt04,4,nm03,producer,producer,\N
+tt09,4,nm03,producer,producer,\N

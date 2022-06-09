@@ -7,10 +7,10 @@ import com.example.Assignment_Arelion.model.UserData;
 import com.example.Assignment_Arelion.repository.ActorsAppearancesRepository;
 import com.example.Assignment_Arelion.repository.ActorsRepository;
 import com.example.Assignment_Arelion.repository.MoviesRepository;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,15 +18,12 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.EntityManagerFactory;
-import java.sql.Array;
 import java.time.LocalTime;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AssignmentArelionApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AssignmentArelionApplicationTests{
@@ -47,12 +44,18 @@ class AssignmentArelionApplicationTests{
 	@Autowired
 	ActorsAppearancesRepository actorsAppearancesRepository;
 
-	@Autowired
-	private EntityManagerFactory entityManagerFactory;
+	@Test
+	@Order(1)
+	void contextLoads() {
+		assertNotNull(authService);
+		assertNotNull(actorsRepository);
+		assertNotNull(moviesRepository);
+		assertNotNull(actorsAppearancesRepository);
+	}
 
-
-
-	AssignmentArelionApplicationTests() {
+    @Test
+	@Order(2)
+	public void createTablesTests() {
 		try {
 			moviesRepository.CreateMovieTable();
 		}
@@ -74,14 +77,6 @@ class AssignmentArelionApplicationTests{
 		{
 			System.out.println(e);
 		}
-	}
-
-	@Test
-	void contextLoads() {
-		assertNotNull(authService);
-		assertNotNull(actorsRepository);
-		assertNotNull(moviesRepository);
-		assertNotNull(actorsAppearancesRepository);
 	}
 
 	@Test
@@ -183,22 +178,16 @@ class AssignmentArelionApplicationTests{
 		catch (Exception e)
 		{
 			System.out.println(e);
-			System.out.println("sjsjsjsjsjs");
 		}
 
 	}
 	@Test
 	public void TestingAPIServiceWithFetchingMovieWithInValidID() throws Exception {
-		try {
 
 			ResponseEntity<String> result = template.withBasicAuth("sajssji", "dattssju")
 					.getForEntity("/api/v1/movies/tt19", String.class);
 			assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
-		}
-		catch (Exception e)
-		{
-			System.out.println(e);
-		}
+
 	}
 	@Test
 	public void TestingAPIServiceWithFetchingActorWithValidIDAndAppearances() throws Exception {

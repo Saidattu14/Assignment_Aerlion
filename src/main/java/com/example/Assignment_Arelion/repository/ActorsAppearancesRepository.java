@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository
-
 public interface ActorsAppearancesRepository extends JpaRepository<ActorAppearance, Long> {
     /**
      * This method is SQL Query Where it finds the actors appearances data.

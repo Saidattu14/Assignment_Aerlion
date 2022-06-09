@@ -11,8 +11,8 @@ public class UserData {
 
     private String username;
     private String password;
-    private int noofrequestsperminute;
-    private LocalTime lastrequesttime;
+    private int noOfRequestsPerMinute;
+    private LocalTime lastRequestTime;
     private AccountStatusinfo accountStatusinfo;
 
 
@@ -32,12 +32,12 @@ public class UserData {
         this.accountStatusinfo = accountStatusinfo;
     }
 
-    public int getNoofrequestsperminute() {
-        return noofrequestsperminute;
+    public int getNoOfRequestsPerMinute() {
+        return noOfRequestsPerMinute;
     }
 
-    public void setNoofrequestsperminute(int noofrequestsperminute) {
-        this.noofrequestsperminute = noofrequestsperminute;
+    public void setNoOfRequestsPerMinute(int noOfRequestsPerMinute) {
+        this.noOfRequestsPerMinute = noOfRequestsPerMinute;
     }
 
     public String getUsername() {
@@ -48,23 +48,23 @@ public class UserData {
         this.username = username;
     }
 
-    public LocalTime getLastrequesttime() {
-        return lastrequesttime;
+    public LocalTime getLastRequestTime() {
+        return lastRequestTime;
     }
 
-    public void setLastrequesttime(LocalTime lastrequesttime) {
-        this.lastrequesttime = lastrequesttime;
+    public void setLastRequestTime(LocalTime lastRequestTime) {
+        this.lastRequestTime = lastRequestTime;
     }
 
     /**
      * This is a class constructor where is assign userdata for the class variables.
      */
-    public UserData(String username, String password, int noofrequestsperminute, LocalTime lastrequesttime, AccountStatusinfo accountStatusinfo)
+    public UserData(String username, String password, int noOfRequestsPerMinute, LocalTime lastRequestTime, AccountStatusinfo accountStatusinfo)
     {
         this.username = username;
         this.password = password;
-        this.noofrequestsperminute = noofrequestsperminute;
-        this.lastrequesttime = lastrequesttime;
+        this.noOfRequestsPerMinute = noOfRequestsPerMinute;
+        this.lastRequestTime = lastRequestTime;
         this.accountStatusinfo = accountStatusinfo;
     }
 }

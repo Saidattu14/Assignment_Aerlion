@@ -1,6 +1,6 @@
 package com.example.Assignment_Arelion.model;
 
-public class Appearance<mv> {
+public class Appearance {
 
     public ActorAppearance getAppearances() {
         return appearances;

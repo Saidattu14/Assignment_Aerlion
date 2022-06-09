@@ -1,0 +1,16 @@
+
+f	java:S117E"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òÜßÛ
+k	java:S117H"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(øÏÌËøÿÿÿÿ
+f	java:S117b"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÞÒƒ·
+g	java:S117Ž"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡µÉ
+q
+java:S1488±"ZImmediately return this expression instead of assigning it to the temporary variable "mv".(ìÔÚš
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ò¤çˆýÿÿÿÿ
+`
+java:S1854H">Remove this useless assignment to local variable "ListActors".(øÏÌËøÿÿÿÿ8õ÷Ž¼”0
+Q
+java:S1481H"/Remove this unused "ListActors" local variable.(øÏÌËøÿÿÿÿ8õ÷Ž¼”0
+\
+java:S1854‘">Remove this useless assignment to local variable "listMovies".(¡¢Ìâ8ý÷Ž¼”0
+M
+java:S1481‘"/Remove this unused "listMovies" local variable.(¡¢Ìâ8ý÷Ž¼”0

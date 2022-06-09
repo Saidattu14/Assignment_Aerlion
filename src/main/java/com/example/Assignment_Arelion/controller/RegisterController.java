@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/register/")
 public class RegisterController  {
@@ -25,7 +27,7 @@ public class RegisterController  {
      * @return the String in Json Form
      */
     @GetMapping("/user")
-    public ResponseEntity<String> registerUser(Authentication authentication) {
+    public ResponseEntity<String> registerUser(Authentication authentication, HttpServletRequest request) {
 
         if(authentication == null)
         {
@@ -33,7 +35,7 @@ public class RegisterController  {
         }
         else if(authentication.getName() != null)
         {
-            if(authService.RegisterAuthentication(authentication) == true)
+            if(authService.registerAuthentication(authentication) == true)
             {
                 return new ResponseEntity<>("Account Created For Access",HttpStatus.ACCEPTED);
             }

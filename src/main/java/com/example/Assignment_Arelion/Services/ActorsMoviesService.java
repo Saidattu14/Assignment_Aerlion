@@ -4,16 +4,26 @@ import com.example.Assignment_Arelion.model.*;
 import com.example.Assignment_Arelion.repository.ActorsAppearancesRepository;
 import com.example.Assignment_Arelion.repository.ActorsRepository;
 import com.example.Assignment_Arelion.repository.MoviesRepository;
+import com.example.Assignment_Arelion.repository1.ActorsResponseRepositoryImp;
+import com.example.Assignment_Arelion.repository1.MoviesResponseRepositoryImp;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ActorsMoviesService {
+
+    @Autowired
+    private MoviesResponseRepositoryImp moviesResponseRepositoryImp;
+
+    @Autowired
+    private ActorsResponseRepositoryImp actorsResponseRepositoryImp;
 
     @Autowired
     private MoviesRepository moviesRepository;
@@ -24,34 +34,30 @@ public class ActorsMoviesService {
     @Autowired
     private ActorsAppearancesRepository actorsAppearancesRepository;
 
-    private Actors actors;
-    private Movies movies;
 
-
-    public ActorsMoviesService(MoviesRepository mr, ActorsRepository ar, ActorsAppearancesRepository aar)
+    public ActorsMoviesService(MoviesResponseRepositoryImp moviesResponseRepositoryImp, ActorsResponseRepositoryImp actorsResponseRepositoryImp, MoviesRepository mr, ActorsRepository ar, ActorsAppearancesRepository aar)
     {
-
+        this.moviesResponseRepositoryImp = moviesResponseRepositoryImp;
+        this.actorsResponseRepositoryImp = actorsResponseRepositoryImp;
         this.moviesRepository = mr;
         this.actorsRepository = ar;
         this.actorsAppearancesRepository = aar;
 
     }
+
+
     /**
      * This method returns the ActorID object for the given id.
      * @param @id the actor_id
      * @return the ActorID object, or {@code null} if none
      */
-    public ActorID ActorDataWithId(String id) {
+    public ActorsResponse actorDataWithId(String id) {
 
         try {
-            actors = this.actorsRepository.findBynconst(id);
-            List<Movies> list = new ArrayList<>();
-            Arrays.stream(actors.getKnownfortitles())
-                    .forEach(x-> list.add(this.moviesRepository.findBytconst(x)));
-            return new ActorID(actors, list);
+            return this.actorsResponseRepositoryImp.findBynconst(id);
         }
         catch (NullPointerException e) {
-//            System.out.println(e);
+            log.error(String.valueOf(e));
             return null;
         }
     }
@@ -60,10 +66,10 @@ public class ActorsMoviesService {
      * @param @page, @page_size, @name
      * @return the List Actors object, or {@code empty List} if none
      */
-    public List<Actors> AllActors(int page,int page_size,String name){
+    public List<ActorsResponse> allActors(int page,int page_size,String name){
 
         int pageoffset = 0;
-        List<Actors> ListActors = new ArrayList<>();
+        List<ActorsResponse> ListActors = new ArrayList<>();
         for(int i = 0; i<page;i++)
         {
             pageoffset = page * i+ 1000;
@@ -71,24 +77,28 @@ public class ActorsMoviesService {
 
         try {
             if (name.length() == 0) {
-                ListActors.addAll(this.actorsRepository.findAllActors(pageoffset, page_size));
-            } else ListActors.addAll(this.actorsRepository.findActorInPage(pageoffset, page_size, name));
+
+                return  actorsResponseRepositoryImp.findAllActors(pageoffset, page_size);
+            }
+            else
+            {
+              return actorsResponseRepositoryImp.findActorsInPageByName(pageoffset,page_size,name);
+            }
         }
         catch (Exception e) {
-//            System.out.println(e);
-            return null;
+            log.error(String.valueOf(e));
+            return Collections.emptyList();
         }
-     return ListActors;
     }
     /**
      * This method returns the List of All ActorsAppearances object for the given actor id with page and page_size.
      * @param @id, @page, @page_size
      * @return the List Appearances objects, or {@code empty List} if none
      */
-    public List<Appearance> ActorAppearances(String id, int page, int page_size) {
+    public List<ActorsAppearancesResponse> actorAppearances(String id, int page, int page_size) {
 
         List<ActorAppearance> list1 = new ArrayList<>();
-        List<Appearance> list2 = new ArrayList<>();
+        List<ActorsAppearancesResponse> list2 = new ArrayList<>();
         try
         {
             int pageoffset1 = 0;
@@ -96,9 +106,10 @@ public class ActorsMoviesService {
             {
                 pageoffset1 = page * i+ 1000;
             }
-            actors = this.actorsRepository.findBynconst(id);
+            Actors actors = this.actorsRepository.findBynconst(id);
             int pageoffset = pageoffset1;
             String[] knownfortitles = actors.getKnownfortitles();
+
             for(int i= 0; i<knownfortitles.length;i++)
             {
                 if(i < page_size)
@@ -111,26 +122,27 @@ public class ActorsMoviesService {
 
             for (ActorAppearance aap : list1) {
                 if (aap != null) {
-                    list2.add(new Appearance(aap, this.moviesRepository.findBytconst(aap.getTconst())));
+                    MoviesResponse mv = this.moviesResponseRepositoryImp.findBytconst(aap.getTconst());
+                    list2.add(new ActorsAppearancesResponse(mv.getTconst(),mv.getOriginaltitle(),aap.getCharacters()));
                 }
             }
-
         }
         catch (Exception e) {
-//            System.out.println(e);
-            return null;
+            log.error(String.valueOf(e));
         }
         return list2;
     }
+
+
     /**
      * This method returns the Movies object for the given page, page_size and name(wildcard search).
      * @param @page, @page_size, @name
      * @return the List Movies object, or {@code empty List} if none
      */
-    public List<Movies> AllMovies(int page, int page_size, String name) {
+    public List<MoviesResponse> allMovies(int page, int page_size, String name) {
 
         try
-        {   List<Movies> Listmovies = new ArrayList<>();
+        {   List<Movies> listMovies = new ArrayList<>();
             int pageoffset = 0;
             for(int i = 0; i<page;i++)
             {
@@ -138,40 +150,37 @@ public class ActorsMoviesService {
             }
             if(name.length() == 0)
             {
-                Listmovies.addAll(this.moviesRepository.findallmovies(pageoffset, page_size));
+                return this.moviesResponseRepositoryImp.findAllMovies(pageoffset, page_size);
             }
             else
             {
-                Listmovies.addAll(this.moviesRepository.findMovieInPage(pageoffset, page_size, name));
+                return this.moviesResponseRepositoryImp.findMoviesInPageByName(pageoffset, page_size, name);
             }
-            return Listmovies;
+
         }
         catch (Exception e) {
-//            System.out.println(e);
-            return null;
+            log.error(String.valueOf(e));
+            return Collections.emptyList();
         }
     }
+
+
     /**
      * This method returns the Movie object for the given id.
      * @param @id the Movie id
      * @return the Movie object, or {@code null} if none
      */
 
-    public Movies MovieWithId(String id) {
+    public MoviesResponse movieWithId(String id) {
         try
         {
-            movies = this.moviesRepository.findBytconst(id);
-            if(movies == null)
-            {
-                return null;
-            }
+            MoviesResponse mv = this.moviesResponseRepositoryImp.findBytconst(id);
+            return mv;
         }
         catch (Exception e) {
-//            System.out.println(e);
+            log.error(String.valueOf(e));
             return null;
         }
-        return movies;
-
     }
 
 }

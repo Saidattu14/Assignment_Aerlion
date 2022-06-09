@@ -7,8 +7,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +26,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         super();
     }
 
+
+    /**
+     * This is method override the configure function and authorize and authenticate every request.
+     */
+    @Override
+    protected void configure(final HttpSecurity http) throws Exception {
+          http
+                .authorizeRequests().anyRequest().authenticated()
+                .and()
+                .httpBasic();
+
+    }
+
     /**
      * This is method override the configure function and verifies the auth Sign In details.
      */
@@ -29,27 +47,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.authenticationProvider(authProvider);
     }
-    /**
-     * This is method override the configure function and authorize and authenticate every request.
-     */
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
-//             http
-//                .authorizeRequests()
-//                .antMatchers("/register/user/**").permitAll()
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers("/api/v1/**").hasAnyRole()
-//                .anyRequest().authenticated()
-//                .and()
-//                .httpBasic();
-             http
-                .authorizeRequests().anyRequest().authenticated()
-                .and()
-                .httpBasic();
-    }
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

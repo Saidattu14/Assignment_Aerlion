@@ -1,0 +1,10 @@
+
+y
+java:S1488)"\Immediately return this expression instead of assigning it to the temporary variable "auth".(¦ø¹Ê8˜ÒÑ»”0
+n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‹ Ÿ
+=
+java:S11255"'Remove the unnecessary boolean literal.(í‚È
+€
+java:S1128"^Remove this unused import 'org.springframework.security.authentication.AuthenticationManager'.(ğş–şÿÿÿÿ8£÷¬»”0
+y
+java:S1128"\Remove this unused import 'org.springframework.security.core.context.SecurityContextHolder'.(ŒÄæë8”Š¶»”0

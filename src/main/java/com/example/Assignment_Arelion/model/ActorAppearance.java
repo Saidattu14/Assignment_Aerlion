@@ -1,14 +1,14 @@
 package com.example.Assignment_Arelion.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
 @Table(name = "actor_appearances")
 public class ActorAppearance {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int ordering;
     private String tconst;
@@ -89,5 +89,7 @@ public class ActorAppearance {
         this.characters = characters;
         this.ordering = ordering;
     }
+
+
 
 }

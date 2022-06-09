@@ -11,6 +11,10 @@ public class ActorID {
       private long birthyear;
       private long deathyear;
       private String[] primaryprofession;
+
+    public ActorID() {
+    }
+
     /**
      * This is a class constructor where is assign data for the data in the class variables.
      */

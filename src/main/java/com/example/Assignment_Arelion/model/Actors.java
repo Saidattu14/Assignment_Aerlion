@@ -85,4 +85,5 @@ public class Actors {
         this.primaryprofession = primaryprofession;
         this.knownfortitles = knownfortitles;
     }
+
 }

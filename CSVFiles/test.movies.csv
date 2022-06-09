@@ -1,0 +1,11 @@
+tconst,titleType,primaryTitle,originalTitle,isAdult,startYear,endYear,runtimeMinutes,genres
+tt01,movie,Tötet nicht mehr,Tötet nicht mehr,0,2019,2020,136,"Action,Crime"
+tt02,short,Color Rhapsodie,Color Rhapsodie,0,2021,2021,6,Short
+tt03,short,Abstronic,Abstronic,0,2021,2021,6,Short
+tt04,short,Mandala,Mandala,0,2021,2021,3,Short
+tt05,short,Aufsätze,Aufsätze,0,2021,2022,10,Short
+tt06,tvEpisode,The Arcata Promise,The Arcata Promise,0,2022,2024,150,"Drama,Music,Musical"
+tt07,short,Histórias de Combóios em Portugal,Histórias de Combóios em Portugal,0,2022,2025,46,"Documentary,Short"
+tt08,movie,The Drive to Win,Sha Ou,0,2019,2022,122,"Drama,Sport"
+tt09,short,Kokoa,Kokoa,0,2019,2025,13,"Animation,Short"
+tt10,movie,Grizzly II: Revenge,Grizzly II: The Predator,0,2020,2027,74,"Horror,Music,Thriller"

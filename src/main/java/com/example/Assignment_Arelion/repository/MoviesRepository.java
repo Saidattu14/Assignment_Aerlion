@@ -25,6 +25,8 @@ public interface MoviesRepository extends JpaRepository<Movies, Long>{
      */
     @Query(value = "SELECT * FROM movies mv ORDER BY primarytitle ASC LIMIT :pagesize OFFSET :pageoffset",nativeQuery = true)
     List<Movies> findallmovies(@Param("pageoffset") int pageoffset, @Param("pagesize") int pagesize);
+
+
     /**
      * This method is SQL Query Where it finds the movie data in particular selected rows.
      * The Condition here is it fetchs rows and searches movie name in those rows and return it.
