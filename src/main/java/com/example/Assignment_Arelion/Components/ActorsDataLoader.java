@@ -1,20 +1,16 @@
 package com.example.Assignment_Arelion.Components;
 
-import com.example.Assignment_Arelion.model.Actors;
-import com.example.Assignment_Arelion.repository.ActorsRepository;
+import com.example.Assignment_Arelion.Model.Actors;
+import com.example.Assignment_Arelion.Repository.ActorsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
 import java.io.FileReader;
 import java.util.List;
+
 import com.opencsv.*;
 
 @Component

@@ -5,14 +5,6 @@ Tsrc/main/java/com/example/Assignment_Arelion/repository1/CustomActorsRepository
 Tsrc/main/java/com/example/Assignment_Arelion/repository1/CustomMoviesRepository.java,1\5\158678f2ff82c1129a910f78f54b078ff79f982e
 
 Qsrc/main/java/com/example/Assignment_Arelion/model/ActorsAppearancesResponse.java,d\c\dc088e3ada32b2ad97f208b5af91fe7c88bab8a9
-v
-Fsrc/main/java/com/example/Assignment_Arelion/model/MoviesResponse.java,2\c\2cd9ff71cf8797e7c791de6e2915df50313eb43e
-n
->src/main/java/com/example/Assignment_Arelion/model/Movies.java,0\f\0f98dcb299c2fdf274f88f61444a9608618e9539
-o
-?src/main/java/com/example/Assignment_Arelion/model/ActorID.java,9\0\900097893d0c9e914744cf06588eb885550a10e5
-w
-Gsrc/main/java/com/example/Assignment_Arelion/model/ActorAppearance.java,c\c\ccc4a9b93cd9887d71061d6e79d933f7536ca306
 H
 CSVFiles/test.movies.csv,2\d\2dde0eff3c8f9fdb7a9a343feb1a5749c9180c62
 7
@@ -23,12 +15,8 @@ M
 CSVFiles/test.appearances.csv,4\f\4f34148d0cf687168676a6ceb7cfecdfe07de892
 ~
 Nsrc/main/java/com/example/Assignment_Arelion/AssignmentArelionApplication.java,3\4\342be84dfeee21471635388c7f3904265944b98a
-p
-@src/main/java/com/example/Assignment_Arelion/model/UserData.java,f\d\fda75342d740d4a68cd8009202617ec01537df90
 v
 Fsrc/main/java/com/example/Assignment_Arelion/model/ActorsResponse.java,2\8\289551339169c930b31f7b839a31c791eb524cc2
-ƒ
-Ssrc/main/java/com/example/Assignment_Arelion/controller/MoviesActorsController.java,0\3\032a4589b0a799dd3b391ec9a8807f2dab7de110
 ~
 Nsrc/main/java/com/example/Assignment_Arelion/Services/ActorsMoviesService.java,6\6\6617cd37e9b7c39fd797fb1b0d02227e4e34ddfd
 ˆ
@@ -39,7 +27,3 @@ Ysrc/main/java/com/example/Assignment_Arelion/repository1/ActorsResponseReposito
 Ysrc/main/java/com/example/Assignment_Arelion/repository1/MoviesResponseRepositoryImp.java,d\9\d99c37ba24e7a1353b594ba0ad2eff0b7608b8f6
 
 Osrc/main/java/com/example/Assignment_Arelion/mapping/CustomStringArrayType.java,0\d\0d3db4966cce96f92444c525378fa63c7c012d23
-r
-Bsrc/main/java/com/example/Assignment_Arelion/model/Appearance.java,8\c\8c90a0541ee94e4ae1821e0f1d446b6ef7bfc609
-ˆ
-Xsrc/main/java/com/example/Assignment_Arelion/repository/ActorsAppearancesRepository.java,6\3\6347b5d14332b3ff4836bcf4a2d8f3611ef65df6

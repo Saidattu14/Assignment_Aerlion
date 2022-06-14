@@ -1,5 +1,5 @@
-package com.example.Assignment_Arelion.repository;
-import com.example.Assignment_Arelion.model.Actors;
+package com.example.Assignment_Arelion.Repository;
+import com.example.Assignment_Arelion.Model.Actors;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package com.example.Assignment_Arelion.controller;
+package com.example.Assignment_Arelion.Controller;
 
 
 import com.example.Assignment_Arelion.Services.AuthService;

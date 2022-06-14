@@ -1,4 +1,4 @@
-package com.example.Assignment_Arelion.model;
+package com.example.Assignment_Arelion.Model;
 
 
 

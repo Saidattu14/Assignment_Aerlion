@@ -1,6 +1,6 @@
-package com.example.Assignment_Arelion.repository1;
+package com.example.Assignment_Arelion.Repository1;
 
-import com.example.Assignment_Arelion.model.ActorsResponse;
+import com.example.Assignment_Arelion.Model.ActorsResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;

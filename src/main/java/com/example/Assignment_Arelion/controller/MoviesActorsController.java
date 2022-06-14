@@ -1,7 +1,7 @@
-package com.example.Assignment_Arelion.controller;
+package com.example.Assignment_Arelion.Controller;
 import com.example.Assignment_Arelion.Services.AuthService;
 import com.example.Assignment_Arelion.Services.ActorsMoviesService;
-import com.example.Assignment_Arelion.model.*;
+import com.example.Assignment_Arelion.Model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

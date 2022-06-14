@@ -2,11 +2,11 @@ package com.example.Assignment_Arelion;
 
 import com.example.Assignment_Arelion.Enums.AccountStatusinfo;
 import com.example.Assignment_Arelion.Services.AuthService;
-import com.example.Assignment_Arelion.model.Actors;
-import com.example.Assignment_Arelion.model.UserData;
-import com.example.Assignment_Arelion.repository.ActorsAppearancesRepository;
-import com.example.Assignment_Arelion.repository.ActorsRepository;
-import com.example.Assignment_Arelion.repository.MoviesRepository;
+import com.example.Assignment_Arelion.Model.Actors;
+import com.example.Assignment_Arelion.Model.UserData;
+import com.example.Assignment_Arelion.Repository.ActorsAppearancesRepository;
+import com.example.Assignment_Arelion.Repository.ActorsRepository;
+import com.example.Assignment_Arelion.Repository.MoviesRepository;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

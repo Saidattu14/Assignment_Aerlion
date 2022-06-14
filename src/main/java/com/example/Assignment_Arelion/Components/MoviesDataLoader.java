@@ -1,9 +1,7 @@
 package com.example.Assignment_Arelion.Components;
 
-import com.example.Assignment_Arelion.model.Actors;
-import com.example.Assignment_Arelion.model.Movies;
-import com.example.Assignment_Arelion.repository.ActorsRepository;
-import com.example.Assignment_Arelion.repository.MoviesRepository;
+import com.example.Assignment_Arelion.Model.Movies;
+import com.example.Assignment_Arelion.Repository.MoviesRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 
 @Component

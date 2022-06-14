@@ -1,7 +1,6 @@
-package com.example.Assignment_Arelion.repository1;
+package com.example.Assignment_Arelion.Repository1;
 
-import com.example.Assignment_Arelion.model.Movies;
-import com.example.Assignment_Arelion.model.MoviesResponse;
+import com.example.Assignment_Arelion.Model.MoviesResponse;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;

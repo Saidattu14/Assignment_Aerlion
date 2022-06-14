@@ -1,4 +1,4 @@
-package com.example.Assignment_Arelion.model;
+package com.example.Assignment_Arelion.Model;
 
 import org.hibernate.annotations.Type;
 
@@ -17,10 +17,10 @@ public class Actors {
     private long birthyear;
     private long deathyear;
     @Column(columnDefinition = "text[]")
-    @Type(type = "com.example.Assignment_Arelion.mapping.CustomStringArrayType")
+    @Type(type = "com.example.Assignment_Arelion.Mapping.CustomStringArrayType")
     private String[] primaryprofession;
     @Column(columnDefinition = "text[]")
-    @Type(type = "com.example.Assignment_Arelion.mapping.CustomStringArrayType")
+    @Type(type = "com.example.Assignment_Arelion.Mapping.CustomStringArrayType")
     private String[] knownfortitles;
 
     public Actors() {

@@ -1,7 +1,6 @@
-package com.example.Assignment_Arelion.repository1;
+package com.example.Assignment_Arelion.Repository1;
 
-import com.example.Assignment_Arelion.model.ActorsResponse;
-import com.example.Assignment_Arelion.model.MoviesResponse;
+import com.example.Assignment_Arelion.Model.MoviesResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 

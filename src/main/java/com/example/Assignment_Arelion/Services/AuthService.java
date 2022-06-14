@@ -1,6 +1,6 @@
 package com.example.Assignment_Arelion.Services;
 import com.example.Assignment_Arelion.Enums.AccountStatusinfo;
-import com.example.Assignment_Arelion.model.UserData;
+import com.example.Assignment_Arelion.Model.UserData;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import java.time.LocalTime;

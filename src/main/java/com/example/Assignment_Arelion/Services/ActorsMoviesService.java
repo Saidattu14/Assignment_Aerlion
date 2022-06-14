@@ -1,11 +1,11 @@
 package com.example.Assignment_Arelion.Services;
 
-import com.example.Assignment_Arelion.model.*;
-import com.example.Assignment_Arelion.repository.ActorsAppearancesRepository;
-import com.example.Assignment_Arelion.repository.ActorsRepository;
-import com.example.Assignment_Arelion.repository.MoviesRepository;
-import com.example.Assignment_Arelion.repository1.ActorsResponseRepositoryImp;
-import com.example.Assignment_Arelion.repository1.MoviesResponseRepositoryImp;
+import com.example.Assignment_Arelion.Model.*;
+import com.example.Assignment_Arelion.Repository.ActorsAppearancesRepository;
+import com.example.Assignment_Arelion.Repository.ActorsRepository;
+import com.example.Assignment_Arelion.Repository.MoviesRepository;
+import com.example.Assignment_Arelion.Repository1.ActorsResponseRepositoryImp;
+import com.example.Assignment_Arelion.Repository1.MoviesResponseRepositoryImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
