@@ -5,39 +5,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Order(1)
+@Order(2)
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class RegisterSecurityConfig extends WebSecurityConfigurerAdapter {
+
 
     @Autowired
-    private CustomAuthenticationProvider authProvider;
+    private RegisterAuthenticationProvider registerAuthenticationProvider;
 
-
-    public SecurityConfig() {
+    public RegisterSecurityConfig() {
         super();
     }
 
-
-    public SecurityConfig(CustomAuthenticationProvider authProvider) {
-        this.authProvider = authProvider;
+    public RegisterSecurityConfig(RegisterAuthenticationProvider registerAuthenticationProvider) {
+        this.registerAuthenticationProvider = registerAuthenticationProvider;
     }
 
-    public SecurityConfig(boolean disableDefaults, CustomAuthenticationProvider authProvider) {
+    public RegisterSecurityConfig(boolean disableDefaults, RegisterAuthenticationProvider registerAuthenticationProvider) {
         super(disableDefaults);
-        this.authProvider = authProvider;
+        this.registerAuthenticationProvider = registerAuthenticationProvider;
     }
 
     /**
@@ -46,16 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 
-        http
-                .authorizeRequests().anyRequest().authenticated()
-                .and()
-                .authenticationProvider(authProvider).antMatcher("/api/**")
+            http
+                .authenticationProvider(this.registerAuthenticationProvider).antMatcher("/register/user")
                 .httpBasic();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 }

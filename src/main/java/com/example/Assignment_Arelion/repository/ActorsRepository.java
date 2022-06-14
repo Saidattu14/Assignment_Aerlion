@@ -84,5 +84,6 @@ public interface ActorsRepository extends JpaRepository<Actors,Long> {
               @Param("primaryProfession") String [] primaryProfession,
               @Param("knownForTitles") String[] knownForTitles);
 
+
 }
 

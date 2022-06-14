@@ -172,61 +172,63 @@ const actors_appearnces_data = (client) => {
 
 const services = async() => {
   
-client.query("drop table actor_appearances",(err,res) => {
-    console.log(res,err)
-    client.query(create_table_actor_appearances,function(err,res) {
-      if(err)
-      {
-        console.log(err);
-      }
-      else
-      {
-        console.log("Table Created1");
-        actors_appearnces_data(client);
-      }
+  client.query("SELECT * FROM actors",(err,res) => {
+      console.log(res)
     });
-})
+
+// client.query("drop table actor_appearances",(err,res) => {
+//     console.log(res,err)
+//     client.query(create_table_actor_appearances,function(err,res) {
+//       if(err)
+//       {
+//         console.log(err);
+//       }
+//       else
+//       {
+//         console.log("Table Created1");
+//         actors_appearnces_data(client);
+//       }
+//     });
+// })
   
  
-  // client.query("SELECT * FROM movies",(err,res) => {
-  //   console.log(res)
-  // })
+//   // client.query("SELECT * FROM movies",(err,res) => {
+//   //   console.log(res)
+//   // })
  
-  // client.query("SELECT * FROM actors",(err,res) => {
-  //   console.log(res)
-  // })
-  // client.query("SELECT * FROM actor_appearances",(err,res) => {
-  //   console.log(res,err)
-  // })
-  client.query("drop table movies",(err,res) => {
-    console.log(res,err)
-    client.query(create_table_movies,function(err,res) {
-      if(err)
-      {
-        console.log(err);
-      }
-      else
-      {
-       console.log("Table Created1");
-       insert_data(client);
-      }
-    });
-  })
-client.query("drop table actors",(err,res) => {
-    console.log(res,err)
-    client.query(create_table_actors,function(err,res) {
-      if(err)
-      {
-        console.log(err);
-      }
-      else
-      {
-       console.log("Table Created1");
-       setting_actors_data(client);
-      }
-    });
-  })
 
+//   // client.query("SELECT * FROM actor_appearances",(err,res) => {
+//   //   console.log(res,err)
+//   // })
+//   client.query("drop table movies",(err,res) => {
+//     console.log(res,err)
+//     client.query(create_table_movies,function(err,res) {
+//       if(err)
+//       {
+//         console.log(err);
+//       }
+//       else
+//       {
+//        console.log("Table Created1");
+//        insert_data(client);
+//       }
+//     });
+//   })
+// client.query("drop table actors",(err,res) => {
+//     console.log(res,err)
+//     client.query(create_table_actors,function(err,res) {
+//       if(err)
+//       {
+//         console.log(err);
+//       }
+//       else
+//       {
+//        console.log("Table Created1");
+//        setting_actors_data(client);
+//       }
+//     });
+//   })
 
+  
 }
 services()

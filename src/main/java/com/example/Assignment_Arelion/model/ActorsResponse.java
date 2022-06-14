@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Entity
-public class ActorsResponse {
+public class ActorsResponse{
 
     @Id
     private String nconst;

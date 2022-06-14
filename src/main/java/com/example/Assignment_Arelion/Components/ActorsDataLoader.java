@@ -36,7 +36,6 @@ public class ActorsDataLoader {
         }
 
         try {
-
             FileReader filereader = new FileReader("C:\\Users\\nagas\\Desktop\\Assignment_Aerlion\\CSVFiles\\test.actors.csv");
             CSVReader csvReader = new CSVReaderBuilder(filereader)
                     .withSkipLines(1)
@@ -55,6 +54,8 @@ public class ActorsDataLoader {
         catch (Exception e) {
             e.printStackTrace();
         }
+
+        log.info("started hello");
 
     }
 

@@ -1,26 +1,0 @@
-
-€
-java:S1319"eThe type of "usersMap" should be an interface such as "Map" rather than the implementation "HashMap".(şÑÉ·ÿÿÿÿÿ
-2
-java:S1643W"Use a StringBuilder instead.(¡¬—ğ
-2
-java:S1643\"Use a StringBuilder instead.(¨éé½
-9
-java:S1643o"Use a StringBuilder instead.(õ8‡µ·”0
->
-java:S1643t"Use a StringBuilder instead.(Åşåÿÿÿÿÿ8‡µ·”0
-o
-java:S1104"TMake usersMap a static final constant or non-public and provide accessors if needed.(şÑÉ·ÿÿÿÿÿ
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ò¤çˆıÿÿÿÿ
-C
-java:S1172P"(Remove this unused method parameter "u".(ŞÕ³ùÿÿÿÿ
-@
-java:S1197R"*Move the array designators [] to the type.(Ü”âŠ
-@
-java:S1197["*Move the array designators [] to the type.(Ê—¸˜
-G
-java:S1197j"*Move the array designators [] to the type.(ğÌ¨ß8Ëµ·”0
-L
-java:S1197s"*Move the array designators [] to the type.(¿Ò¢Öùÿÿÿÿ8ïµ·”0
-k
-java:S2175‹"MA "HashMap<String, UserData>" cannot contain a "UserData" in a "String" type.(ÍìşĞ8ÏË·”0

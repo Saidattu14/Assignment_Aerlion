@@ -14,9 +14,9 @@ public class AuthService {
 
     /**
      * This method returns boolean value.
-     * This Method validate Sign In details for the UserAccount When the user tries to regester the data.
+     * This Method Validating Sign In details for the UserAccount When the user tries to register the data.
      * @param @authentication
-     * @return true if no such useraccount details found else false for similar data.
+     * @return true if no such UserAccount details found else false for similar data.
      */
     public boolean registerAuthentication(final Authentication authentication)
     {
@@ -47,7 +47,7 @@ public class AuthService {
         {
             UserData u = usersMap.get(name);
             int lastRequestTimeData = Integer.parseInt(getLastRequestTime(u));
-            int currentRequestTimeData = Integer.parseInt(getCurrentRequestTime(u));
+            int currentRequestTimeData = Integer.parseInt(getCurrentRequestTime());
             if(lastRequestTimeData > currentRequestTimeData)
             {
                 currentRequestTimeData = lastRequestTimeData + currentRequestTimeData;
@@ -74,12 +74,11 @@ public class AuthService {
 
     /**
      * This method get the currentRequestTime API call time of the user data.
-     * @param @UserData
      * @return time value in String.
      */
-    private String getCurrentRequestTime(UserData u)
+    private String getCurrentRequestTime()
     {
-        String currentRequestTimeStr[] = LocalTime.now().toString().split(":");
+        String[] currentRequestTimeStr = LocalTime.now().toString().split(":");
         String currentRequestTime = "";
         for(int i = 0; i<currentRequestTimeStr.length;i++)
         {
@@ -124,7 +123,7 @@ public class AuthService {
      * This method validates the User Account data when user tries to access the API data.
      * Main Purpose is to activate the UserData when the user SignIn
      * @param authentication
-     * @return true if the user has a registed Account Else it returns false.
+     * @return true if the user has a registered Account Else it returns false.
      */
     public boolean loginAuthentication(final Authentication authentication)
     {
@@ -155,7 +154,15 @@ public class AuthService {
             UserData u = usersMap.get(name);
             return u.getPassword().equals(password);
         }
-        else if(usersMap.get(name) == null && name.length() != 0 && password.length() !=0)
+
+        return false;
+    }
+
+    public boolean registerAuth(final Authentication authentication)
+    {
+        final String name = authentication.getName();
+        final String password = authentication.getCredentials().toString();
+        if(usersMap.get(name) == null && name.length() != 0 && password.length() !=0)
         {
             usersMap.put(name,new UserData(name,password,0,LocalTime.now(), AccountStatusinfo.Created));
             return true;

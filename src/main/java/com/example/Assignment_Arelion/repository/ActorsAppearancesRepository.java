@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 @Repository
 public interface ActorsAppearancesRepository extends JpaRepository<ActorAppearance, Long> {
+
     /**
      * This method is SQL Query Where it finds the actors appearances data.
      * The Condition here is it finds actor id and movie id fetch that row.
@@ -16,6 +17,7 @@ public interface ActorsAppearancesRepository extends JpaRepository<ActorAppearan
      */
     @Query(value = "SELECT * From (SELECT * FROM actor_appearances ac WHERE ac.nconst =:nconst AND ac.tconst =:tconst) as Temp OFFSET :pageoffset",nativeQuery = true)
     ActorAppearance findactorappearnces(@Param("nconst") String nconst,@Param("tconst") String tconst, @Param("pageoffset") int pageoffset);
+
 
     /**
      * This method is SQL Query Where it creates ActorsAppearances Table.
